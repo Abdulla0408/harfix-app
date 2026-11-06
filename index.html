@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <title>Harfix</title>
+  <meta name="description" content="Matnni yangi oʻzbek alifbosiga, eski lotin va kirillga oʻgiruvchi ilova.">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">Ş</div>
+      <div>
+        <h1>Harfix</h1>
+        <p class="sub" data-t="Yangi oʻzbek alifbosi yordamchisi"></p>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" role="tab" data-tab="convert" data-t="Oʻgirish"></button>
+      <button class="tab" role="tab" data-tab="learn" data-t="Alifbo"></button>
+      <button class="tab" role="tab" data-tab="quiz" data-t="Test"></button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Convert -->
+    <section id="tab-convert" class="panel active">
+      <div class="seg" role="radiogroup" id="targets">
+        <button data-target="new" class="on"><span data-t="Yangi lotin"></span><small>ö ğ ş ç</small></button>
+        <button data-target="old"><span data-t="Eski lotin"></span><small>oʻ gʻ sh ch</small></button>
+        <button data-target="cyr"><span>Кирилл</span><small>ў ғ ш ч</small></button>
+      </div>
+
+      <div class="card">
+        <label for="src" class="label" data-t="Matn"></label>
+        <textarea id="src" rows="5" spellcheck="false" autocomplete="off"></textarea>
+        <div class="row small">
+          <span id="count" class="hint"></span>
+          <button id="clear" class="link" data-t="Tozalash"></button>
+        </div>
+      </div>
+
+      <div class="card result">
+        <div class="row">
+          <span class="label" data-t="Natija"></span>
+          <span id="badge" class="badge"></span>
+        </div>
+        <div id="out" class="out" aria-live="polite"></div>
+      </div>
+
+      <div class="actions">
+        <button id="copy" class="btn primary" data-t="Nusxalash"></button>
+        <button id="share" class="btn" data-t="Chatga yuborish" hidden></button>
+        <button id="send" class="btn" data-t="Botga yuborish" hidden></button>
+      </div>
+      <p class="hint center" data-t="Matn qaysi alifboda boʻlishidan qatʼi nazar — lotin yoki kirill — tanlangan alifboga oʻgiriladi."></p>
+    </section>
+
+    <!-- Learn -->
+    <section id="tab-learn" class="panel">
+      <p class="lead" data-t="Qonun bilan lotin alifbosidagi 4 ta harf oʻzgardi. Qolgan harflar avvalgidek qoladi."></p>
+      <div class="letters" id="letters"></div>
+
+      <div class="card">
+        <h2 data-t="Qoidalar"></h2>
+        <ul class="rules" id="rules"></ul>
+      </div>
+
+      <div class="card">
+        <h2 data-t="Qanday yoziladi?"></h2>
+        <p data-t="Telefon yoki kompyuterga Türkçe (Q) klaviaturasini qoʻshing — unda ö ğ ş ç tayyor tugmalar bor."></p>
+        <p class="warn" data-t="Diqqat: turk klaviaturasida I tugmasi nuqtasiz ı yozadi, oddiy i alohida tugmada."></p>
+        <p data-t="Eng oson yoʻl — odatdagidek yozing va Harfix bilan oʻgiring."></p>
+      </div>
+    </section>
+
+    <!-- Quiz -->
+    <section id="tab-quiz" class="panel">
+      <div class="card quiz" id="quiz">
+        <div class="row">
+          <span id="qnum" class="hint"></span>
+          <span id="qscore" class="badge"></span>
+        </div>
+        <div class="progress"><div id="qbar"></div></div>
+        <h2 id="qtext"></h2>
+        <div id="qopts" class="opts"></div>
+        <p id="qexpl" class="hint"></p>
+        <button id="qnext" class="btn primary" data-t="Keyingi savol" hidden></button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="harfix.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
