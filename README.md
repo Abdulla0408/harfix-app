@@ -20,15 +20,23 @@ python -m http.server 8765 --directory miniapp
 
 Keyin brauzerda http://localhost:8765 ni oching. Telegram tugmalari ("Botga yuborish", "Chatga yuborish") faqat Telegram ichida chiqadi.
 
-## Internetga joylash (GitHub Pages, bepul)
+## Internetda
 
-Telegram Mini App faqat **https** manzil bilan ishlaydi. Eng oson yo‘l: GitHub Pages.
+Ilova GitHub Pages'da turadi: https://abdulla0408.github.io/harfix-app/
+(repozitoriy: https://github.com/Abdulla0408/harfix-app). Bu manzil `bot/.env` dagi `MINIAPP_URL` da yozilgan.
 
-1. github.com da yangi **public** repozitoriy oching, masalan `harfix`.
-2. **Add file → Upload files** ni bosing va `miniapp` papkasidagi `index.html`, `style.css`, `app.js`, `harfix.js` fayllarini yuklang. `tests` papkasi kerak emas.
-3. **Settings → Pages → Branch: main / (root) → Save**.
-4. 1–2 daqiqadan keyin manzil chiqadi: `https://<login>.github.io/harfix/`.
-5. Shu manzilni `bot/.env` ga yozing: `MINIAPP_URL=https://<login>.github.io/harfix/`, keyin botni qayta ishga tushiring.
+`miniapp` papkasining o‘zi shu repozitoriyga ulangan git papka. O‘zgartirishni internetga chiqarish uchun:
+
+```bash
+cd miniapp
+git add -A
+git commit -m "Mini App yangilandi"
+git push
+```
+
+1–2 daqiqadan keyin sayt yangilanadi. Telegram eski nusxani keshda saqlab qolsa, ilovani yopib qayta oching.
+
+Telegram Mini App faqat **https** manzil bilan ishlaydi. Manzil o‘zgarsa, `MINIAPP_URL` ni yangilab, botni qayta ishga tushiring.
 
 Bot ishga tushganda o‘zi menyu tugmasini (chat pastidagi "Harfix") va "📱 Harfix ilovasi" tugmasini qo‘yadi.
 
