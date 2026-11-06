@@ -64,12 +64,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   padding: 14px 16px 0;
 }
 .brand { display: flex; align-items: center; gap: 12px; }
-.logo {
-  width: 42px; height: 42px; border-radius: 12px;
-  display: grid; place-items: center;
-  background: var(--accent); color: var(--accent-text);
-  font-weight: 800; font-size: 24px;
-}
+.logo { width: 42px; height: 42px; border-radius: 12px; display: block; flex: none; }
 h1 { font-size: 20px; margin: 0; line-height: 1.1; }
 h2 { font-size: 17px; margin: 0 0 10px; }
 .sub { margin: 2px 0 0; color: var(--hint); font-size: 13px; }
