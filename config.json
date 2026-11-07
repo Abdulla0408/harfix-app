@@ -1,0 +1,18 @@
+{
+  "_help": "ZAXIRA NUSXA. Asl sozlamalar Supabase'da, botdagi /admin -> Ilovalar -> Boshqaruv paneli orqali o'zgartiriladi. Bu fayl faqat Supabase'ga ulanib bo'lmaganda o'qiladi; unda reklama o'chiq qolsin.",
+  "schema": 1,
+  "ads": {
+    "enabled": false,
+    "grace_days": 3,
+    "sponsors": [],
+    "network": {
+      "android": { "enabled": false, "provider": "yandex", "banner_id": "" }
+    }
+  },
+  "stats": { "enabled": true },
+  "notice": null,
+  "latest": {
+    "android": { "version": "1.1.0", "url": "" },
+    "windows": { "version": "1.1.0", "url": "" }
+  }
+}

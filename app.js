@@ -287,4 +287,72 @@
     $("qnext").textContent = L("Qaytadan boshlash");
     haptic(k >= 0.8 ? "success" : "warning");
   });
+
+  // --- online: config.json (this site), sponsor card, anonymous daily count ------------
+  // Nothing here is needed for the app to work; without internet it simply does nothing.
+  var O = window.HarfixOnline;
+  var VERSION = "1.1.0";
+  function statsOn() { return store("harfix.stats") !== "0"; }
+  $("stats-toggle").checked = statsOn();
+  $("stats-toggle").addEventListener("change", function () { store("harfix.stats", this.checked ? "1" : "0"); });
+  function dismissed() {
+    try { var d = JSON.parse(store("harfix.dismissed") || "[]"); return Array.isArray(d) ? d : []; } catch (e) { return []; }
+  }
+  function openUrl(url) {
+    try {
+      if (inTelegram && /^https:\/\/t\.me\//i.test(url) && tg.openTelegramLink) { tg.openTelegramLink(url); return; }
+      if (inTelegram && tg.openLink) { tg.openLink(url); return; }
+    } catch (e) { /* older Telegram: a plain link */ }
+    window.open(url, "_blank", "noopener");
+  }
+  function installDays() {
+    var first = store("harfix.first");
+    if (!/^\d{4}-\d\d-\d\d$/.test(first || "")) { first = O.today(); store("harfix.first", first); }
+    return Math.max(0, Math.floor((Date.parse(O.today()) - Date.parse(first)) / 864e5));
+  }
+  function ping(config) {
+    if (!statsOn() || store("harfix.ping") === O.today()) return;
+    var id = store("harfix.id");
+    if (!/^[0-9a-f-]{36}$/.test(id || "")) {
+      id = O.newId();
+      store("harfix.id", id);
+      if (store("harfix.id") !== id) return; // no storage: every visit would look like a new person
+    }
+    var t = O.statsTarget(config);
+    fetch(t.url, { method: "POST", headers: { apikey: t.key, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_id: id, p_platform: "miniapp", p_version: VERSION }) })
+      .then(function (r) { if (r.ok) store("harfix.ping", O.today()); }, function () { /* offline */ });
+  }
+  function showOnline(config, fresh) {
+    var p = O.plan(config, { platform: "miniapp", version: VERSION, installDays: installDays(), fresh: fresh,
+      dismissed: dismissed() });
+    O.render(p, { top: $("online-top"), ad: $("online-ad"), L: L, open: openUrl, dismiss: function (id) {
+      store("harfix.dismissed", JSON.stringify(dismissed().concat([id]).slice(-50)));
+    } });
+    return p;
+  }
+  // --- admin panel: only with a session the bot gives admins (/admin → 📱 Ilovalar) ------
+  (function () {
+    var m = /[?&]admin=([0-9a-f]{64})(?:&|$)/.exec(location.search);
+    if (m) {
+      store("harfix.admin", m[1]);
+      try { history.replaceState(null, "", location.pathname + location.hash); } catch (e) { /* keep the address */ }
+    }
+    var token = store("harfix.admin");
+    if (!/^[0-9a-f]{64}$/.test(token || "") || !window.fetch) return;
+    var s = document.createElement("script");
+    s.src = "admin.js";
+    s.onload = function () {
+      if (window.HarfixAdmin) {
+        window.HarfixAdmin.start({ token: token, L: L, toast: toast, tg: inTelegram ? tg : null, store: store, opened: !!m });
+      }
+    };
+    document.body.appendChild(s);
+  })();
+
+  if (O && window.fetch) {
+    O.loadConfig("config.json")
+      .then(function (config) { if (showOnline(config, !!config).stats) ping(config); },
+        function () { ping(null); });
+  }
 })();

@@ -23,10 +23,14 @@
       <button class="tab active" role="tab" data-tab="convert" data-t="Oʻgirish"></button>
       <button class="tab" role="tab" data-tab="learn" data-t="Alifbo"></button>
       <button class="tab" role="tab" data-tab="quiz" data-t="Test"></button>
+      <button class="tab" role="tab" data-tab="admin" hidden></button>
     </nav>
   </header>
 
   <main>
+    <!-- Announcement / new version (online.js; empty without internet) -->
+    <div id="online-top" class="online-top" hidden></div>
+
     <!-- Convert -->
     <section id="tab-convert" class="panel active">
       <div class="seg" role="radiogroup" id="targets">
@@ -58,6 +62,7 @@
         <button id="send" class="btn" data-t="Botga yuborish" hidden></button>
       </div>
       <p class="hint center" data-t="Matn qaysi alifboda boʻlishidan qatʼi nazar — lotin yoki kirill — tanlangan alifboga oʻgiriladi."></p>
+      <div id="online-ad" class="online-ad" hidden></div>
     </section>
 
     <!-- Learn -->
@@ -76,7 +81,18 @@
         <p class="warn" data-t="Diqqat: turk klaviaturasida I tugmasi nuqtasiz ı yozadi, oddiy i alohida tugmada."></p>
         <p data-t="Eng oson yoʻl — odatdagidek yozing va Harfix bilan oʻgiring."></p>
       </div>
+
+      <div class="card">
+        <label class="set">
+          <div><b data-t="🔒 Anonim statistika"></b>
+            <p class="hint" data-t="Kuniga bir marta faqat «ilova ishlatildi» belgisi yuboriladi: tasodifiy raqam va versiya. Ism, Telegram akkaunt, matn yuborilmaydi."></p></div>
+          <span class="switch"><input type="checkbox" id="stats-toggle"><span></span></span>
+        </label>
+      </div>
     </section>
+
+    <!-- Admin panel (admin.js; only with a session from the bot's /admin) -->
+    <section id="tab-admin" class="panel"></section>
 
     <!-- Quiz -->
     <section id="tab-quiz" class="panel">
@@ -97,6 +113,7 @@
   <div id="toast" class="toast" role="status"></div>
 
   <script src="harfix.js"></script>
+  <script src="online.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
