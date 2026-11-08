@@ -11,7 +11,7 @@
   "use strict";
 
   var RPC = "https://lucopmrphagzxticypmq.supabase.co/rest/v1/rpc/";
-  var PLATFORMS = [["android", "Android"], ["windows", "Windows"], ["miniapp", "Mini App"]];
+  var PLATFORMS = [["android", "Android"], ["windows", "Windows"], ["miniapp", "Mini App"], ["web", "Sayt"]];
   var O = window.HarfixOnline;
   var env, L, root, saveBar, saveBtn, saveNote;
   var version = 0, cfg = null, stats = null, expires = "", dirty = false, saving = false;
