@@ -12,7 +12,7 @@
   "stats": { "enabled": true },
   "notice": null,
   "latest": {
-    "android": { "version": "1.1.0", "url": "" },
+    "android": { "version": "1.5.0", "url": "https://harfix.uz/yuklab-olish/#android", "text": "lugʻat va avto-tuzatish, chizib yozish, yangi koʻrinish. Yangi imzo: avval eski versiyani oʻchiring, keyin oʻrnating." },
     "windows": { "version": "1.1.0", "url": "" }
   }
 }
